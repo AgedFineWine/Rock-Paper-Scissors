@@ -50,18 +50,18 @@ function verdict(scoreCount, lossCount) {
 function game(playerSelection) {
     let scoreCount = 0;
     let lossCount = 0;
-    // playerSelection = playerSelection.toLowerCase();
-
+    const displayResults = document.querySelector(".display-results");
+    const result = document.querySelector('#result');
     let computerSelection = getComputerChoice();
     let resultArray = playRound(playerSelection, computerSelection);
     if ((resultArray[1]) === 0){
-        console.log(resultArray[0], `[Player: ${scoreCount} / Computer: ${lossCount}]`);
+        result.textContent = resultArray[0] + `[Player: ${scoreCount} / Computer: ${lossCount}]`;
     } else if (resultArray[1] === 2){
         scoreCount += 1;
-        console.log(resultArray[0], `[Player: ${scoreCount} / Computer: ${lossCount}]`);
+        result.textContent = resultArray[0] + `[Player: ${scoreCount} / Computer: ${lossCount}]`;
     } else if (resultArray[1] === 1){
         lossCount += 1;
-        console.log(resultArray[0], `[Player: ${scoreCount} / Computer: ${lossCount}]`);
+        result.textContent = resultArray[0] + `[Player: ${scoreCount} / Computer: ${lossCount}]`;
     }
     verdict(scoreCount, lossCount);
 }
