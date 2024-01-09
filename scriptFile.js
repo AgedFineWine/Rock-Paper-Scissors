@@ -3,7 +3,7 @@ class RockPaperScissorsGame {
         this.scoreCount = 0;
         this.lossCount = 0;
         this.roundsPlayed = 0;
-        this.isGameActive = true;
+
     }
 
     getComputerChoice() {
@@ -86,22 +86,22 @@ class RockPaperScissorsGame {
         this.lossCount = 0;
         this.roundsPlayed = 0;
         document.querySelector('#result').textContent = 'Chose an option to start the game!';
-        document.querySelector('#score').textContent = '';
-        this.isGameActive = true;
-    }
+        document.querySelector('#final-msg').textContent = '';
+        const btns = document.querySelectorAll('.btn-choice')
+        btns.forEach(btnReference => {
+            btnReference.addEventListener('click', () => this.playRound(btnReference.id));
+        });
 
+    }
+    
     pauseGame() {
-        const btns = document.querySelector('#rock')
+        const btns = document.querySelectorAll('.btn-choice')
         btns.forEach(btnReference => {
             btnReference.removeEventListener('click', () => this.playRound(btnReference.id));
         });
-        this.isGameActive = false;
     }
 
     playRound(playerSelection) {
-        if (!this.isGameActive) {
-            return;
-        }
 
         const computerChoice = this.getComputerChoice();
         const roundResult = this.getRoundResult(playerSelection, computerChoice);
@@ -124,7 +124,9 @@ function main() {
     btns.forEach(btnReference => {
         btnReference.addEventListener('click', () => game.playRound(btnReference.id));
     });
-    resetBtn.addEventListener('click', game.resetGame);
+    resetBtn.addEventListener('click', () => {
+        game.resetGame();
+    });
 }
 
 main()
